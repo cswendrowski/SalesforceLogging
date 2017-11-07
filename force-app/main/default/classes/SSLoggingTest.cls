@@ -7,6 +7,7 @@ class SSLoggingTest {
         settings.App_Name__c = 'SSLoggingTesting';
         settings.Papertrail_LogsX__c = 1;
         settings.Papertrail_Port__c = 44444;
+        settings.Log_Layout__c = '[${level}] ${message}';
 
         insert settings;
     }

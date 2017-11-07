@@ -107,15 +107,15 @@
     [
         "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\classes\\SSLogging.cls",
         {
-            "state": "u",
             "sourcePath": "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\classes\\SSLogging.cls",
             "isDirectory": false,
-            "isMetadataFile": false,
             "size": 2688,
             "modifiedTime": 1510087394048,
             "changeTime": 1510087394064,
-            "isWorkspace": false,
-            "contentHash": "977e9bd362aeff20c06f2052395330af020bc1ca"
+            "contentHash": "977e9bd362aeff20c06f2052395330af020bc1ca",
+            "isMetadataFile": false,
+            "state": "u",
+            "isWorkspace": false
         }
     ],
     [
@@ -255,16 +255,14 @@
     [
         "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\objects\\SSLoggingSettings__c\\fields",
         {
+            "state": "u",
             "sourcePath": "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\objects\\SSLoggingSettings__c\\fields",
             "isDirectory": true,
-            "size": 0,
-            "modifiedTime": 1510080757079,
-            "changeTime": 1510080757079,
-            "contentHash": "cd369cd2cb72d52275f5e61e4f18562fc133aeb7",
             "isMetadataFile": false,
-            "state": "u",
-            "isWorkspace": false,
-            "isArtifactRoot": false
+            "size": 0,
+            "modifiedTime": 1510088440621,
+            "changeTime": 1510088440621,
+            "contentHash": "08c88e6996fc27b8f6da6a91c826ece93fc250a1"
         }
     ],
     [
@@ -445,6 +443,19 @@
             "state": "u",
             "isWorkspace": true,
             "isArtifactRoot": false
+        }
+    ],
+    [
+        "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\objects\\SSLoggingSettings__c\\fields\\Log_Layout__c.field-meta.xml",
+        {
+            "state": "u",
+            "sourcePath": "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\objects\\SSLoggingSettings__c\\fields\\Log_Layout__c.field-meta.xml",
+            "isDirectory": false,
+            "isMetadataFile": true,
+            "size": 630,
+            "modifiedTime": 1510088440627,
+            "changeTime": 1510088440627,
+            "contentHash": "bcc3f1fe8dedbe1d65742d0828864b3940ebc49e"
         }
     ]
 ]

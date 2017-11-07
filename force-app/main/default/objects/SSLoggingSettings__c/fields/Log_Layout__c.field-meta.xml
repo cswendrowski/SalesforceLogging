@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Log_Layout__c</fullName>
+    <description>How logs should be displayed. Autoinjected fields are ${message}, ${logger}, ${level}, and ${date}</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How logs should be displayed. Autoinjected fields are ${message}, ${logger}, ${level}, and ${date}</inlineHelpText>
+    <label>Log Layout</label>
+    <length>40</length>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

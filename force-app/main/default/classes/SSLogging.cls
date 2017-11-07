@@ -21,27 +21,27 @@ public class SSLogging {
     }
 
     public void error(String message) {
-        postLogToBridge(hostName, appName, loggerName, message, 'error');
+        postLogToBridge(hostName, appName, loggerName, message, 'error', settings.Log_Layout__c);
     }
 
     public void warn(String message) {
-        postLogToBridge(hostName, appName, loggerName, message, 'warn');
+        postLogToBridge(hostName, appName, loggerName, message, 'warn', settings.Log_Layout__c);
     }
 
     public void info(String message) {
-        postLogToBridge(hostName, appName, loggerName, message, 'info');
+        postLogToBridge(hostName, appName, loggerName, message, 'info', settings.Log_Layout__c);
     }
 
     public void debug(String message) {
-        postLogToBridge(hostName, appName, loggerName, message, 'debug');
+        postLogToBridge(hostName, appName, loggerName, message, 'debug', settings.Log_Layout__c);
     }
 
     public void trace(String message) {
-        postLogToBridge(hostName, appName, loggerName, message, 'trace');
+        postLogToBridge(hostName, appName, loggerName, message, 'trace', settings.Log_Layout__c);
     }
 
     @future(callout=true)
-    private static void postLogToBridge(String hostName, String appName, String loggerName, String message, String level) {
+    private static void postLogToBridge(String hostName, String appName, String loggerName, String message, String level, String layout) {
         System.debug(message);
 
         HttpRequest request = new HttpRequest();
@@ -51,7 +51,7 @@ public class SSLogging {
         String url = 'https://salesforcelogging.azurewebsites.net/api/Log';
         request.setEndpoint(url);
 
-        LogMessage log = new LogMessage(hostName, appName, loggerName, message, level);
+        LogMessage log = new LogMessage(hostName, appName, loggerName, message, level, layout);
         String json = System.JSON.serialize(log);
 
         request.setBody(json);
@@ -74,13 +74,15 @@ public class SSLogging {
         public String loggerName;
         public String message;
         public String logLevel;
+        public String logLayout;
 
-        public LogMessage(String hostName, String appName, String loggerName, String message, String logLevel) {
+        public LogMessage(String hostName, String appName, String loggerName, String message, String logLevel, String layout) {
             this.hostName = hostName;
             this.appName = appName;
             this.loggerName = loggerName;
             this.message = message;
             this.logLevel = logLevel;
+            this.logLayout = layout;
         }
     }
 }
