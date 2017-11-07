@@ -1,0 +1,11 @@
+{
+  "edition": "Developer",
+  "features": "Communities",
+  "orgPreferences": {
+    "enabled": [
+      "NetworksEnabled",
+      "S1DesktopEnabled"
+    ],
+    "disabled": []
+  }
+}
