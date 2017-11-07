@@ -36,7 +36,7 @@ SSLogging fully supports the following dynamic values for the Log Layout:
 * `${logger}` - The logger name
 * `${message}` - The formatted log message
 
-SSLogging has support for any automatic values from the default NLog Package listed [here](https://github.com/NLog/NLog/wiki/Layout-Renderers) but does not have support for certain dynamic values such as `${exeception}`.
+SSLogging has support for any automatic values from the default NLog Package listed [here](https://github.com/NLog/NLog/wiki/Layout-Renderers) but does not have support for certain dynamic values such as `${exception}`.
 
 Examples:
 `[${level}|${logger}] ${message}` produces `[Info|TestLogger] Test`
