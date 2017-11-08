@@ -65,7 +65,7 @@
             "sourcePath": "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\classes",
             "isDirectory": true,
             "size": 0,
-            "modifiedTime": 1510087394065,
+            "modifiedTime": 1510157506402,
             "changeTime": 1510084904986,
             "contentHash": "bba2d64c63160136ac5dc692b94cf2f42d214eba",
             "isMetadataFile": false,
@@ -109,10 +109,10 @@
         {
             "sourcePath": "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\classes\\SSLogging.cls",
             "isDirectory": false,
-            "size": 2688,
-            "modifiedTime": 1510087394048,
-            "changeTime": 1510087394064,
-            "contentHash": "977e9bd362aeff20c06f2052395330af020bc1ca",
+            "size": 2918,
+            "modifiedTime": 1510088599681,
+            "changeTime": 1510088599700,
+            "contentHash": "b21e38863e036149ba9c8c9957fa02de62e0eded",
             "isMetadataFile": false,
             "state": "u",
             "isWorkspace": false
@@ -136,15 +136,15 @@
     [
         "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\classes\\SSLoggingTest.cls",
         {
+            "state": "u",
             "sourcePath": "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\classes\\SSLoggingTest.cls",
             "isDirectory": false,
-            "size": 1686,
-            "modifiedTime": 1510086946726,
-            "changeTime": 1510086946738,
-            "contentHash": "505541cff6ae4ed044d8cfc1fe417366b47e7abd",
             "isMetadataFile": false,
-            "state": "u",
-            "isWorkspace": false
+            "size": 1670,
+            "modifiedTime": 1510157506392,
+            "changeTime": 1510157506401,
+            "isWorkspace": false,
+            "contentHash": "bf5356b3a02968880f60a80c0a31fac0623e4018"
         }
     ],
     [
@@ -255,14 +255,14 @@
     [
         "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\objects\\SSLoggingSettings__c\\fields",
         {
-            "state": "u",
             "sourcePath": "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\objects\\SSLoggingSettings__c\\fields",
             "isDirectory": true,
-            "isMetadataFile": false,
             "size": 0,
             "modifiedTime": 1510088440621,
             "changeTime": 1510088440621,
-            "contentHash": "08c88e6996fc27b8f6da6a91c826ece93fc250a1"
+            "contentHash": "08c88e6996fc27b8f6da6a91c826ece93fc250a1",
+            "isMetadataFile": false,
+            "state": "u"
         }
     ],
     [
@@ -436,26 +436,25 @@
             "sourcePath": "C:\\git\\Salesforce\\SSLogging",
             "isDirectory": true,
             "size": 0,
-            "modifiedTime": 1510085208661,
-            "changeTime": 1510075524791,
-            "contentHash": "6c0f19df4f57946264b0870fddfa1a1beb52c3ff",
+            "modifiedTime": 1510087849407,
+            "changeTime": 1510087849407,
+            "contentHash": "3af12cda3639bab075c2352a953b8ed70370d292",
             "isMetadataFile": false,
             "state": "u",
-            "isWorkspace": true,
-            "isArtifactRoot": false
+            "isWorkspace": true
         }
     ],
     [
         "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\objects\\SSLoggingSettings__c\\fields\\Log_Layout__c.field-meta.xml",
         {
-            "state": "u",
             "sourcePath": "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\objects\\SSLoggingSettings__c\\fields\\Log_Layout__c.field-meta.xml",
             "isDirectory": false,
-            "isMetadataFile": true,
             "size": 630,
             "modifiedTime": 1510088440627,
             "changeTime": 1510088440627,
-            "contentHash": "bcc3f1fe8dedbe1d65742d0828864b3940ebc49e"
+            "contentHash": "bcc3f1fe8dedbe1d65742d0828864b3940ebc49e",
+            "isMetadataFile": true,
+            "state": "u"
         }
     ]
 ]

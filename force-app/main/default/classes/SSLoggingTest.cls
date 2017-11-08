@@ -1,6 +1,10 @@
 @isTest
 class SSLoggingTest {
 
+    private static SSLogging logger = SSLogging.GetCurrentClassLogger();
+    private static SSLogging appNamedLogger = SSLogging.GetCurrentClassLogger().withAppName('CustomAppName');
+    private static SSLogging namedLogger = SSLogging.GetLogger('CustomLogger');
+
     @testSetup
     static void setup() {
         SSLoggingSettings__c settings = new SSLoggingSettings__c();
@@ -16,8 +20,6 @@ class SSLoggingTest {
     static void testInfoLog() {
         Test.setMock(HttpCalloutMock.class, new SalesforceLoggingHttpMock());
 
-        SSLogging logger = SSLogging.GetCurrentClassLogger();
-
         System.assert(logger != null);
         logger.info('Info Test');
         System.assert(true);
@@ -25,30 +27,22 @@ class SSLoggingTest {
 
     @isTest
     static void testDefaultAppname() {
-        SSLogging logger = SSLogging.GetCurrentClassLogger();
-
         System.assertEquals('SSLoggingTesting', logger.appName);
     }
 
     @isTest
     static void testCanSetAppname() {
-        SSLogging logger = SSLogging.GetCurrentClassLogger().withAppName('CustomAppName');
-
-        System.assertEquals('CustomAppName', logger.appName);
+        System.assertEquals('CustomAppName', appNamedLogger.appName);
     }
 
     @isTest
     static void testDefaultLoggerName() {
-        SSLogging logger = SSLogging.GetCurrentClassLogger();
-
         System.assertEquals('SSLoggingTest', logger.loggerName);
     }
 
     @isTest
     static void testNamedLogger() {
-        SSLogging logger = SSLogging.GetLogger('CustomLogger');
-
-        System.assertEquals('CustomLogger', logger.loggerName);
+        System.assertEquals('CustomLogger', namedLogger.loggerName);
     }
 
     @isTest
