@@ -102,6 +102,8 @@ public class SampleLogging {
 }
 ```
 
+**WARNING: Salesforce has a transaction limit on HTTP callouts. A single Apex transaction can make a maximum of 100 callouts to an HTTP request or an API call. This means one [transaction](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_transaction.htm#!) can have at most 100 logs.**
+
 ## Creating JS Logs
 
 **Coming soon**
