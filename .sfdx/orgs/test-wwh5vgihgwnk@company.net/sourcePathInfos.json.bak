@@ -65,7 +65,7 @@
             "sourcePath": "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\classes",
             "isDirectory": true,
             "size": 0,
-            "modifiedTime": 1510090721147,
+            "modifiedTime": 1510161112107,
             "changeTime": 1510084904986,
             "contentHash": "bba2d64c63160136ac5dc692b94cf2f42d214eba",
             "isMetadataFile": false,
@@ -111,11 +111,11 @@
             "sourcePath": "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\classes\\SSLogging.cls",
             "isDirectory": false,
             "isMetadataFile": false,
-            "size": 2918,
-            "modifiedTime": 1510088599681,
-            "changeTime": 1510088599700,
+            "size": 3728,
+            "modifiedTime": 1510161112090,
+            "changeTime": 1510161112106,
             "isWorkspace": false,
-            "contentHash": "b21e38863e036149ba9c8c9957fa02de62e0eded"
+            "contentHash": "d5c2be01d9cf89e895a173d9a3d738bd36e0618d"
         }
     ],
     [
@@ -136,15 +136,15 @@
     [
         "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\classes\\SSLoggingTest.cls",
         {
-            "state": "u",
             "sourcePath": "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\classes\\SSLoggingTest.cls",
             "isDirectory": false,
+            "size": 1670,
+            "modifiedTime": 1510157506392,
+            "changeTime": 1510157506401,
+            "contentHash": "bf5356b3a02968880f60a80c0a31fac0623e4018",
             "isMetadataFile": false,
-            "size": 1821,
-            "modifiedTime": 1510090721126,
-            "changeTime": 1510090721145,
-            "isWorkspace": false,
-            "contentHash": "db2b99c6ae6ce050060fca612a75f03ce20070fe"
+            "state": "u",
+            "isWorkspace": false
         }
     ],
     [
@@ -433,15 +433,15 @@
     [
         "C:\\git\\Salesforce\\SSLogging",
         {
-            "state": "u",
             "sourcePath": "C:\\git\\Salesforce\\SSLogging",
             "isDirectory": true,
-            "isMetadataFile": false,
             "size": 0,
-            "modifiedTime": 1510087849407,
+            "modifiedTime": 1510157791880,
             "changeTime": 1510087849407,
-            "isWorkspace": true,
-            "contentHash": "3af12cda3639bab075c2352a953b8ed70370d292"
+            "contentHash": "3af12cda3639bab075c2352a953b8ed70370d292",
+            "isMetadataFile": false,
+            "state": "u",
+            "isWorkspace": true
         }
     ],
     [
