@@ -45,28 +45,28 @@
     [
         "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\aura",
         {
+            "state": "u",
             "sourcePath": "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\aura",
             "isDirectory": true,
+            "isMetadataFile": false,
             "size": 0,
             "modifiedTime": 1510256603037,
             "changeTime": 1510256603037,
-            "contentHash": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
-            "isMetadataFile": false,
-            "state": "u",
-            "isWorkspace": false
+            "isWorkspace": false,
+            "contentHash": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
         }
     ],
     [
         "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\classes",
         {
+            "state": "u",
             "sourcePath": "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\classes",
             "isDirectory": true,
-            "size": 0,
-            "modifiedTime": 1510259676797,
-            "changeTime": 1510259273037,
-            "contentHash": "bba2d64c63160136ac5dc692b94cf2f42d214eba",
             "isMetadataFile": false,
-            "state": "u"
+            "size": 0,
+            "modifiedTime": 1510259273037,
+            "changeTime": 1510259273037,
+            "contentHash": "bba2d64c63160136ac5dc692b94cf2f42d214eba"
         }
     ],
     [
@@ -106,11 +106,11 @@
             "sourcePath": "C:\\git\\Salesforce\\SSLogging\\force-app\\main\\default\\classes\\SSLogging.cls",
             "isDirectory": false,
             "isMetadataFile": false,
-            "size": 4189,
-            "modifiedTime": 1510259676768,
-            "changeTime": 1510259676795,
+            "size": 5187,
+            "modifiedTime": 1510259273010,
+            "changeTime": 1510259273036,
             "isWorkspace": false,
-            "contentHash": "27b4c601a47a008e4cf5f8adee073c2160b45939"
+            "contentHash": "1b081b9df15993b27a438ca1fc5587ebdc1ea50b"
         }
     ],
     [

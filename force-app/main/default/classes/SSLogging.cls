@@ -20,10 +20,18 @@ public class SSLogging {
         return this;
     }
 
+    public void error(Object o) {
+        error(o.toString());
+    }
+
     public void error(String message) {
         System.debug(System.LoggingLevel.ERROR, message);
 
         postLogToBridge(new LogMessage(hostName, appName, loggerName, settings, message, 'error'));
+    }
+
+    public void warn(Object o) {
+        warn(o.toString());
     }
 
     public void warn(String message) {
@@ -32,16 +40,28 @@ public class SSLogging {
         postLogToBridge(new LogMessage(hostName, appName, loggerName, settings, message, 'warn'));
     }
 
+    public void info(Object o) {
+        info(o.toString());
+    }
+
     public void info(String message) {
         System.debug(System.LoggingLevel.INFO, message);
 
         postLogToBridge(new LogMessage(hostName, appName, loggerName, settings, message, 'info'));
     }
 
+    public void debug(Object o) {
+        debug(o.toString());
+    }
+
     public void debug(String message) {
         System.debug(System.LoggingLevel.DEBUG, message);
 
         postLogToBridge(new LogMessage(hostName, appName, loggerName, settings, message, 'debug'));
+    }
+
+    public void trace(Object o) {
+        trace(o.toString());
     }
 
     public void trace(String message) {
@@ -52,12 +72,20 @@ public class SSLogging {
 
     private void postLogToBridge(LogMessage log) {
         try {
-            if (Limits.getQueueableJobs() < Limits.getLimitQueueableJobs()) {
-                System.enqueueJob(new QueueableLogSender(new Set<LogMessage>{log}));
-            } else {
-                System.debug(System.LoggingLevel.ERROR, 'SSLogging: Reached queuable limit');
-            }
-        } catch (System.AsyncException e) {
+            HttpRequest request = new HttpRequest();
+            Http http = new Http();
+            request.setMethod('POST');
+
+            String url = 'https://salesforcelogging.azurewebsites.net/api/Log';
+            request.setEndpoint(url);
+
+            String json = System.JSON.serialize(log);
+
+            request.setBody(json);
+            request.setHeader('content-type', 'application/json');
+
+            HttpResponse response = http.send(request);
+        } catch (Exception e) {
             System.debug(System.LoggingLevel.ERROR, 'SSLogging: Unable to queue log message.\n Reason: ' + e.getMessage());
         }
     }
@@ -100,43 +128,10 @@ public class SSLogging {
             this.loggerName = loggerName;
             this.message = message;
             this.logLevel = logLevel;
-            this.paperTrailX = settings.Papertrail_LogsX__c;
-            this.paperTrailPort = settings.Papertrail_Port__c;
+            this.paperTrailX = settings.Papertrail_LogsX__c.intValue();
+            this.paperTrailPort = settings.Papertrail_Port__c.intValue();
             this.logLayout = settings.Log_Layout__c;
             sourceDate = Datetime.now();
-        }
-    }
-
-    // Based on https://github.com/solenopsis/sloggly/blob/master/classes/Loggly.cls
-    public class QueueableLogSender implements Queueable, Database.AllowsCallouts {
-        private Set<LogMessage> logs;
-
-        public QueueableLogSender(Set<LogMessage> logs) {
-            this.logs = logs;
-        }
-
-        public void execute(QueueableContext context) {
-
-            for (LogMessage log : logs) {
-                try {
-                    HttpRequest request = new HttpRequest();
-                    Http http = new Http();
-                    request.setMethod('POST');
-
-                    String url = 'https://salesforcelogging.azurewebsites.net/api/Log';
-                    request.setEndpoint(url);
-
-                    String json = System.JSON.serialize(log);
-
-                    request.setBody(json);
-                    request.setHeader('content-type', 'application/json');
-
-                    HttpResponse response = http.send(request);
-                }
-                catch (Exception e) {
-                    System.debug(System.LoggingLevel.ERROR, e);
-                }
-            }
         }
     }
 }
