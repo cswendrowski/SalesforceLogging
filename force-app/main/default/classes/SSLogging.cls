@@ -21,51 +21,45 @@ public class SSLogging {
     }
 
     public void error(String message) {
-        postLogToBridge(hostName, appName, loggerName, message, 'error',
-                settings.Papertrail_LogsX__c, settings.Papertrail_Port__c, settings.Log_Layout__c);
+        System.debug(System.LoggingLevel.ERROR, message);
+
+        postLogToBridge(new LogMessage(hostName, appName, loggerName, settings, message, 'error'));
     }
 
     public void warn(String message) {
-        postLogToBridge(hostName, appName, loggerName, message, 'warn',
-                settings.Papertrail_LogsX__c, settings.Papertrail_Port__c, settings.Log_Layout__c);
+        System.debug(System.LoggingLevel.WARN, message);
+
+        postLogToBridge(new LogMessage(hostName, appName, loggerName, settings, message, 'warn'));
     }
 
     public void info(String message) {
-        postLogToBridge(hostName, appName, loggerName, message, 'info',
-                settings.Papertrail_LogsX__c, settings.Papertrail_Port__c, settings.Log_Layout__c);
+        System.debug(System.LoggingLevel.INFO, message);
+
+        postLogToBridge(new LogMessage(hostName, appName, loggerName, settings, message, 'info'));
     }
 
     public void debug(String message) {
-        postLogToBridge(hostName, appName, loggerName, message, 'debug',
-                settings.Papertrail_LogsX__c, settings.Papertrail_Port__c, settings.Log_Layout__c);
+        System.debug(System.LoggingLevel.DEBUG, message);
+
+        postLogToBridge(new LogMessage(hostName, appName, loggerName, settings, message, 'debug'));
     }
 
     public void trace(String message) {
-        postLogToBridge(hostName, appName, loggerName, message, 'trace',
-                settings.Papertrail_LogsX__c, settings.Papertrail_Port__c, settings.Log_Layout__c);
+        System.debug(System.LoggingLevel.FINE, message);
+
+        postLogToBridge(new LogMessage(hostName, appName, loggerName, settings, message, 'trace'));
     }
 
-    private void postLogToBridge(String hostName, String appName, String loggerName, String message, String level,
-            Decimal logsX, Decimal port, String layout) {
-        System.debug(message);
-
-        HttpRequest request = new HttpRequest();
-        Http http = new Http();
-        request.setMethod('POST');
-
-        String url = 'https://salesforcelogging.azurewebsites.net/api/Log';
-        request.setEndpoint(url);
-
-        LogMessage log = new LogMessage(hostName, appName, loggerName, message, level,
-                logsX.intValue(), port.intValue(), layout);
-        String json = System.JSON.serialize(log);
-
-        System.debug('Sending json ' + json);
-
-        request.setBody(json);
-        request.setHeader('content-type', 'application/json');
-
-        HttpResponse response = http.send(request);
+    private void postLogToBridge(LogMessage log) {
+        try {
+            if (Limits.getQueueableJobs() < Limits.getLimitQueueableJobs()) {
+                System.enqueueJob(new QueueableLogSender(new Set<LogMessage>{log}));
+            } else {
+                System.debug(System.LoggingLevel.ERROR, 'SSLogging: Reached queuable limit');
+            }
+        } catch (System.AsyncException e) {
+            System.debug(System.LoggingLevel.ERROR, 'SSLogging: Unable to queue log message.\n Reason: ' + e.getMessage());
+        }
     }
 
     public static SSLogging GetCurrentClassLogger() {
@@ -98,6 +92,51 @@ public class SSLogging {
             this.paperTrailPort = paperTrailPort;
             this.logLayout = layout;
             sourceDate = Datetime.now();
+        }
+
+        public LogMessage(String hostName, String appName, String loggerName, SSLoggingSettings__c settings, String message, String logLevel) {
+            this.hostName = hostName;
+            this.appName = appName;
+            this.loggerName = loggerName;
+            this.message = message;
+            this.logLevel = logLevel;
+            this.paperTrailX = settings.Papertrail_LogsX__c;
+            this.paperTrailPort = settings.Papertrail_Port__c;
+            this.logLayout = settings.Log_Layout__c;
+            sourceDate = Datetime.now();
+        }
+    }
+
+    // Based on https://github.com/solenopsis/sloggly/blob/master/classes/Loggly.cls
+    public class QueueableLogSender implements Queueable, Database.AllowsCallouts {
+        private Set<LogMessage> logs;
+
+        public QueueableLogSender(Set<LogMessage> logs) {
+            this.logs = logs;
+        }
+
+        public void execute(QueueableContext context) {
+
+            for (LogMessage log : logs) {
+                try {
+                    HttpRequest request = new HttpRequest();
+                    Http http = new Http();
+                    request.setMethod('POST');
+
+                    String url = 'https://salesforcelogging.azurewebsites.net/api/Log';
+                    request.setEndpoint(url);
+
+                    String json = System.JSON.serialize(log);
+
+                    request.setBody(json);
+                    request.setHeader('content-type', 'application/json');
+
+                    HttpResponse response = http.send(request);
+                }
+                catch (Exception e) {
+                    System.debug(System.LoggingLevel.ERROR, e);
+                }
+            }
         }
     }
 }
