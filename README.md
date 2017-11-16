@@ -1,6 +1,6 @@
 # About
 
-SSLogging uses an Azure Function as a Logging bridge in order to aggregate live-logs from Apex and Javascript to [Papertrail](https://papertrailapp.com), a popular log service with excellent search and filter capabilities.
+SSLogging uses an Azure Function as a Logging bridge in order to aggregate live-logs from Apex to any Syslog system that uses TCP. This ReadMe will focus on it's use with [Papertrail](https://papertrailapp.com), a popular log service with excellent search and filter capabilities.
 
 Logging is automatically able to be grouped and filtered in Papertrail by environment (`HostName`) and application (`AppName`).
 
@@ -8,15 +8,14 @@ SSLogging uses [NLog](https://github.com/NLog) behind the scenes as its bridge l
 
 ## Why?
 
-Apex logs are pretty terrible to find and use, which makes debugging a pain. By aggregatting logs across all environments and systems (both Apex and JS) it becomes much easier to understand your code's behavior at a glance and help resolve bugs.
+Apex logs are pretty terrible to find and use, which makes debugging a pain. By aggregatting logs across all environments it becomes much easier to understand your code's behavior at a glance and help resolve bugs.
 
 # Installing SSLogging
 
 One Click Deploy to Scratch Org via Dev Hub:
 [![Deploy](https://deploy-to-sfdx.com/dist/assets/images/DeployToSFDX.svg)](https://deploy-to-sfdx.com)
 
-As Managed Package:
-**Coming Soon**
+[Beta Managed Package](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t41000002eTp3&isdtp=p1)
 
 ## Configuring
 
@@ -26,12 +25,13 @@ From your Papertrail account, hit "Add Systems" and find the URL they give you f
 [![4ba5fa5a92.png](https://s1.postimg.org/7o7jkua0f3/4ba5fa5a92.png)](https://postimg.org/image/6sb25e0byz/)
 
 Create an org-wide default setting that points to your PaperTrail and define a Log Layout.
-![](https://s1.postimg.org/5afeba7eb3/087db900ef.png)
+![](http://puu.sh/ynlvM/828c197f67.png)
 
 ### Log Layouts
 
 SSLogging fully supports the following dynamic values for the Log Layout:
 
+* `${date}` - The datetime the log was generated **in Salesforce**. Papertrail will automatically append a Timestamp of when it **recieves** the log.
 * `${level}` - The log level
 * `${logger}` - The logger name
 * `${message}` - The formatted log message
@@ -57,7 +57,7 @@ SSLogging supports the following levels:
 * `Warn` - warning messages, typically for non-critical issues, which can be recovered or which are temporary failures
 * `Error` - error messages - most of the time these are Exceptions
 
-## Creating Apex Logs
+## Creating Logs
 
 ### Creating loggers
 Apex logging should be familiar to anyone who has used NLog or simliar logging libraries before.
@@ -103,7 +103,3 @@ public class SampleLogging {
 ```
 
 **WARNING: Salesforce has a transaction limit on HTTP callouts. A single Apex transaction can make a maximum of 100 callouts to an HTTP request or an API call. This means one [transaction](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_transaction.htm#!) can have at most 100 logs.**
-
-## Creating JS Logs
-
-**Coming soon**
