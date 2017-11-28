@@ -9,8 +9,9 @@ class SSLoggingTest {
     static void setup() {
         SSLoggingSettings__c settings = new SSLoggingSettings__c();
         settings.App_Name__c = 'SSLoggingTesting';
-        settings.Papertrail_LogsX__c = 1;
-        settings.Papertrail_Port__c = 44444;
+        settings.Logging_Bridge_Url__c = 'http://www.bridge.dev/Log';
+        settings.Logging_Server_URL__c = 'http://www.someserver.dev';
+        settings.Logging_Server_Port__c = 44444;
         settings.Log_Layout__c = '[${level}] ${message}';
 
         insert settings;

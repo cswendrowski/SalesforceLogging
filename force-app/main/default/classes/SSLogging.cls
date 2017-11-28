@@ -20,18 +20,10 @@ public class SSLogging {
         return this;
     }
 
-    public void error(Object o) {
-        error(o.toString());
-    }
-
     public void error(String message) {
         System.debug(System.LoggingLevel.ERROR, message);
 
         postLogToBridge(new LogMessage(hostName, appName, loggerName, settings, message, 'error'));
-    }
-
-    public void warn(Object o) {
-        warn(o.toString());
     }
 
     public void warn(String message) {
@@ -40,28 +32,17 @@ public class SSLogging {
         postLogToBridge(new LogMessage(hostName, appName, loggerName, settings, message, 'warn'));
     }
 
-    public void info(Object o) {
-        info(o.toString());
-    }
-
     public void info(String message) {
         System.debug(System.LoggingLevel.INFO, message);
 
         postLogToBridge(new LogMessage(hostName, appName, loggerName, settings, message, 'info'));
     }
 
-    public void debug(Object o) {
-        debug(o.toString());
-    }
 
     public void debug(String message) {
         System.debug(System.LoggingLevel.DEBUG, message);
 
         postLogToBridge(new LogMessage(hostName, appName, loggerName, settings, message, 'debug'));
-    }
-
-    public void trace(Object o) {
-        trace(o.toString());
     }
 
     public void trace(String message) {
@@ -75,9 +56,7 @@ public class SSLogging {
             HttpRequest request = new HttpRequest();
             Http http = new Http();
             request.setMethod('POST');
-
-            String url = 'https://salesforcelogging.azurewebsites.net/api/Log';
-            request.setEndpoint(url);
+            request.setEndpoint(log.bridgeUrl);
 
             String json = System.JSON.serialize(log);
 
@@ -104,23 +83,12 @@ public class SSLogging {
         public String loggerName;
         public String message;
         public String logLevel;
-        public Integer paperTrailX;
-        public Integer paperTrailPort;
+        public String bridgeUrl;
+        public String loggingServerUrl;
+        public Integer loggingServerPort;
         public String logLayout;
         public Datetime sourceDate;
 
-        public LogMessage(String hostName, String appName, String loggerName, String message, String logLevel,
-                Integer paperTrailX, Integer paperTrailPort, String layout) {
-            this.hostName = hostName;
-            this.appName = appName;
-            this.loggerName = loggerName;
-            this.message = message;
-            this.logLevel = logLevel;
-            this.paperTrailX = paperTrailX;
-            this.paperTrailPort = paperTrailPort;
-            this.logLayout = layout;
-            sourceDate = Datetime.now();
-        }
 
         public LogMessage(String hostName, String appName, String loggerName, SSLoggingSettings__c settings, String message, String logLevel) {
             this.hostName = hostName;
@@ -128,8 +96,9 @@ public class SSLogging {
             this.loggerName = loggerName;
             this.message = message;
             this.logLevel = logLevel;
-            this.paperTrailX = settings.Papertrail_LogsX__c.intValue();
-            this.paperTrailPort = settings.Papertrail_Port__c.intValue();
+            this.bridgeUrl = settings.Logging_Bridge_Url__c;
+            this.loggingServerUrl = settings.Logging_Server_URL__c;
+            this.loggingServerPort = settings.Logging_Server_Port__c.intValue();
             this.logLayout = settings.Log_Layout__c;
             sourceDate = Datetime.now();
         }
